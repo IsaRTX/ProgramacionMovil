@@ -1,0 +1,78 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Datos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">menu</ion-title>
+      <ion-icon name="map-outline"></ion-icon>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-header>
+      Ingreso de datos:
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Ubicación</ion-label>
+        <ion-icon name="map-outline" slot="start"></ion-icon>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Producto</ion-label>
+        <ion-icon name="pricetags-outline" slot="start"></ion-icon>
+        <ion-select>
+          <ion-select-option value="comida">Comida</ion-select-option>
+          <ion-select-option value="material">Material</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Valor</ion-label>
+        <ion-icon name="cash-outline" slot="start"></ion-icon>
+        <ion-input type="text" value="$"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Adjuntar Imagen</ion-label>
+        <ion-icon name="camera" slot="start"></ion-icon>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      Extras:
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Notas</ion-label>
+        <ion-textarea></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>¿Desea devolución?</ion-label>
+        <ion-toggle [(ngModel)]="toggleValue" (change)="toggleChange()"></ion-toggle>
+      </ion-item>
+      
+      <!-- Submenú -->
+      <ion-item *ngIf="toggleValue">
+        <ion-label>Socio:</ion-label>
+        <ion-select>
+          <ion-select-option value="Marcelo">Marcelo</ion-select-option>
+          <ion-select-option value="David">David</ion-select-option>
+          <ion-select-option value="Ignacia">Ignacia</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
