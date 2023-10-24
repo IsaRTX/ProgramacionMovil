@@ -1,0 +1,46 @@
+<!-- login.page.html -->
+
+
+<ion-content class="ion-padding ion-text-center ion-align-items-center">
+  <ion-grid>
+    <ion-row class="icon">
+      <ion-col size="12" class="ion-text-center">
+        <ion-img src="assets/logo.png" class="rotate-vert-center"></ion-img>
+      </ion-col>
+     
+    </ion-row>
+    <ion-row>
+      <div class="icon">
+        <ion-img src="assets/img/solarsolution.png" class="scale-up-ver-bottom"></ion-img>
+      </div>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <ion-card>
+          <ion-card-header>
+            Inicio de sesión
+          </ion-card-header>
+          <form [formGroup]="formularioLogin" (ngSubmit)="login()">
+            <ion-item>
+              <ion-label position="floating">Nombre:</ion-label>
+              <ion-input formControlName="nombre"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Contraseña:</ion-label>
+              <ion-input formControlName="password" type="password"></ion-input>
+            </ion-item>
+            <ion-button expand="full" type="submit" [disabled]="!formularioLogin.valid">INGRESAR</ion-button>
+          </form>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="primary" class="ion-justify-content-center">
+      <!-- Redirige al usuario a la página de registro -->
+      <ion-button [routerLink]="['/registro']" color="success">Registrarse</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

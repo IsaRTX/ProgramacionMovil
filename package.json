@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@agm/core": "^3.0.0-beta.0",
+    "@capacitor/camera": "^5.0.7",
+    "@capacitor/cli": "^5.5.0",
+    "@capacitor/core": "^5.5.0"
+  }
+}
