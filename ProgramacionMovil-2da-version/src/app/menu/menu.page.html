@@ -18,7 +18,14 @@
     </ion-card-header>
     <ion-card-content>
       <ion-item>
-        <ion-label position="floating">Ubicación</ion-label>
+        <ion-button (click)="obtenerNombreLugar()">Ubicación actual
+        </ion-button>
+
+      <ion-item>
+        <ion-label></ion-label>
+        <ion-input [(ngModel)]="nombreDelLugar" disabled="true"></ion-input>
+      </ion-item>
+        <ion-label position="floating">Nombre negocio/empresa</ion-label>
         <ion-icon name="map-outline" slot="start"></ion-icon>
         <ion-input type="text"></ion-input>
       </ion-item>
