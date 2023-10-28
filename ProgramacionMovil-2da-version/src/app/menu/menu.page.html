@@ -66,19 +66,15 @@
         <ion-label>¿Desea devolución?</ion-label>
         <ion-toggle [(ngModel)]="toggleValue" (change)="toggleChange()"></ion-toggle>
       </ion-item>
-      
-      <!-- Submenú -->
+
       <ion-item *ngIf="toggleValue">
         <ion-label>Socio:</ion-label>
         <ion-select>
-          <ion-select-option value="Marcelo">Marcelo</ion-select-option>
-          <ion-select-option value="David">David</ion-select-option>
           <ion-select-option value="Ignacia">Ignacia</ion-select-option>
+          <ion-select-option value="Marcelo">Fabian</ion-select-option>
+          <ion-select-option value="David">David</ion-select-option>
         </ion-select>
       </ion-item>
-
-
-
     </ion-card-content>
   </ion-card>
 </ion-content>

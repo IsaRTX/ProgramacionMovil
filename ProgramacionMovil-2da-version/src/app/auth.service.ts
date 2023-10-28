@@ -1,5 +1,3 @@
-// auth.service.ts
-
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -17,7 +15,6 @@ export class AuthService {
   
 
   registrarUsuario(usuario: any): void {
-    // Antes de registrar al usuario, verifica que el correo electrónico no esté duplicado
     if (!this.verificarEmailUnico(usuario.email)) {
       console.log('El correo electrónico ya está registrado.');
       return;
@@ -30,7 +27,6 @@ export class AuthService {
     return !this.usuariosRegistrados.some((usuario) => usuario.email === email);
   }
 
-  // Agrega una función para obtener un usuario por su correo electrónico
   obtenerUsuarioPorEmail(email: string): any {
     return this.usuariosRegistrados.find((usuario) => usuario.email === email);
   }

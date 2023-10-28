@@ -19,21 +19,19 @@ export class LoginPage {
     private authService: AuthService
   ) {
     this.formularioLogin = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      correoElectronico: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
   }
 
   login() {
-    this.loginError = false; // Restablecer el estado de error
-    this.registroExitoso = false; // Restablecer el estado de confirmación
-  
+    this.loginError = false;
+    this.registroExitoso = false;
+
     if (this.formularioLogin.valid) {
       const credenciales = this.formularioLogin.value;
-  
-      // Busca al usuario por correo electrónico
       const usuario = this.authService.obtenerUsuarioPorEmail(credenciales.email);
-  
+
       if (usuario && usuario.password === credenciales.password) {
         console.log('Inicio de sesión exitoso');
         this.router.navigate(['/menu']);
@@ -43,17 +41,19 @@ export class LoginPage {
       }
     }
   }
-  
 
   registrar() {
-    this.loginError = false; // Restablecer el estado de error
+    this.loginError = false;
 
     if (this.formularioLogin.valid) {
       const usuario = this.formularioLogin.value;
-      this.authService.registrarUsuario(usuario);
-      console.log('Usuario registrado:', usuario);
-      this.registroExitoso = true;
+      if (this.authService.verificarEmailUnico(usuario.email)) {
+        this.authService.registrarUsuario(usuario);
+        console.log('Usuario registrado:', usuario);
+        this.registroExitoso = true;
+      } else {
+        console.log('El correo electrónico ya está registrado.');
+      }
     }
   }
 }
-

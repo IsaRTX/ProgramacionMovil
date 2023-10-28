@@ -7,7 +7,7 @@ import { Geolocation } from '@capacitor/geolocation';
   styleUrls: ['menu.page.scss'],
 })
 export class MenuPage {
-  toggleValue: boolean = false; // Inicializamos como falso (desactivado)
+  toggleValue: boolean = false;
 
   constructor() {}
 
@@ -16,23 +16,19 @@ export class MenuPage {
   }
   latitude: number | undefined;
   longitude: number | undefined;
-  nombreDelLugar: string | undefined; // Variable para almacenar el nombre del lugar
+  nombreDelLugar: string | undefined;
 
   async obtenerUbicacion() {
     const coordinates = await Geolocation.getCurrentPosition();
     this.latitude = coordinates.coords.latitude;
     this.longitude = coordinates.coords.longitude;
   }
-
-  
-
   async obtenerUbicacionActual(): Promise<{ latitude: number, longitude: number }> {
     const coordinates = await Geolocation.getCurrentPosition();
     const latitude = coordinates.coords.latitude;
     const longitude = coordinates.coords.longitude;
     return { latitude, longitude };
   }
-
   async getPlaceName(latitude: number, longitude: number, apiKey: string): Promise<string> {
     const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
   
@@ -51,7 +47,6 @@ export class MenuPage {
       return 'Error al obtener información del lugar.';
     }
   }
-  
   async obtenerNombreLugar() {
     const apiKey = 'AIzaSyCShFjh1lVUwXAzJyQw_ylR05tn0sbOK74'; 
     const coordinates = await this.obtenerUbicacionActual();
