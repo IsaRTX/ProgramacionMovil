@@ -19,7 +19,7 @@ export class LoginPage {
     private authService: AuthService
   ) {
     this.formularioLogin = this.fb.group({
-      nombreUsuario: ['', Validators.required], // Cambiado a nombreUsuario
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
   }
@@ -27,10 +27,14 @@ export class LoginPage {
   login() {
     this.loginError = false; // Restablecer el estado de error
     this.registroExitoso = false; // Restablecer el estado de confirmación
-
+  
     if (this.formularioLogin.valid) {
       const credenciales = this.formularioLogin.value;
-      if (this.authService.verificarCredenciales(credenciales)) {
+  
+      // Busca al usuario por correo electrónico
+      const usuario = this.authService.obtenerUsuarioPorEmail(credenciales.email);
+  
+      if (usuario && usuario.password === credenciales.password) {
         console.log('Inicio de sesión exitoso');
         this.router.navigate(['/menu']);
       } else {
@@ -39,6 +43,7 @@ export class LoginPage {
       }
     }
   }
+  
 
   registrar() {
     this.loginError = false; // Restablecer el estado de error
