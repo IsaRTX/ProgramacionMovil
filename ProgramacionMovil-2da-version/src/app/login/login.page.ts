@@ -1,5 +1,3 @@
-// login.page.ts
-
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,6 +10,8 @@ import { AuthService } from '../auth.service';
 })
 export class LoginPage {
   formularioLogin: FormGroup;
+  loginError: boolean = false;
+  registroExitoso: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -19,13 +19,15 @@ export class LoginPage {
     private authService: AuthService
   ) {
     this.formularioLogin = this.fb.group({
-      nombre: ['', Validators.required],
+      nombreUsuario: ['', Validators.required], // Cambiado a nombreUsuario
       password: ['', Validators.required],
     });
   }
 
-  // Método para iniciar sesión
   login() {
+    this.loginError = false; // Restablecer el estado de error
+    this.registroExitoso = false; // Restablecer el estado de confirmación
+
     if (this.formularioLogin.valid) {
       const credenciales = this.formularioLogin.value;
       if (this.authService.verificarCredenciales(credenciales)) {
@@ -33,16 +35,20 @@ export class LoginPage {
         this.router.navigate(['/menu']);
       } else {
         console.log('Inicio de sesión fallido');
+        this.loginError = true;
       }
     }
   }
 
-  // Método para registrar un nuevo usuario
   registrar() {
+    this.loginError = false; // Restablecer el estado de error
+
     if (this.formularioLogin.valid) {
       const usuario = this.formularioLogin.value;
       this.authService.registrarUsuario(usuario);
       console.log('Usuario registrado:', usuario);
+      this.registroExitoso = true;
     }
   }
 }
+
