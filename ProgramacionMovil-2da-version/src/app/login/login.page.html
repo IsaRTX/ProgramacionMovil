@@ -16,8 +16,8 @@
           </ion-card-header>
           <form [formGroup]="formularioLogin" (ngSubmit)="login()">
             <ion-item>
-              <ion-label position="floating">Nombre de Usuario:</ion-label>
-              <ion-input formControlName="nombreUsuario"></ion-input>
+              <ion-label position="floating">Correo Electrónico:</ion-label>
+              <ion-input formControlName="email"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Contraseña:</ion-label>
@@ -26,7 +26,7 @@
             <ion-button expand="full" type="submit" [disabled]="!formularioLogin.valid">INGRESAR</ion-button>
           </form>
           <div *ngIf="loginError" class="error-message">
-            El usuario o contraseña no coincide.
+            El correo o contraseña no coincide.
           </div>
           <div *ngIf="registroExitoso" class="success-message">
             Usuario creado correctamente.

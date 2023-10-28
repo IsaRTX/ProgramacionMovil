@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { AlertController } from '@ionic/angular'
 
 @Component({
   selector: 'app-registro',
@@ -16,7 +17,8 @@ export class RegistroPage {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private alertController: AlertController
   ) {
     this.formularioRegistro = this.fb.group({
       nombre: ['', Validators.required],
@@ -27,15 +29,28 @@ export class RegistroPage {
     });
   }
 
-  registrarUsuario() {
+  async registrarUsuario() {
     if (this.formularioRegistro.valid) {
       const usuario = this.formularioRegistro.value;
 
       // Verificar que las contraseñas coincidan
       if (usuario.password === usuario.confirmPassword) {
         this.authService.registrarUsuario(usuario);
-        // Redirigir al usuario a la página de inicio de sesión
-        this.router.navigate(['/login']);
+  
+        const alert = await this.alertController.create({
+          header: 'REGISTRO:',
+          message: 'Tu usuario ha sido creado exitosamente.',
+          buttons: [
+            {
+              text: 'OK',
+              handler: () => {
+                this.router.navigate(['/login']);
+              }
+            }
+          ]
+        });
+  
+        await alert.present();
       } else {
         console.log('Las contraseñas no coinciden.');
       }
