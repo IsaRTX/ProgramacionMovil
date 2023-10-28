@@ -52,9 +52,8 @@ export class MenuPage {
     }
   }
   
-  // Luego, al llamar a la función obtenerNombreLugar, pásale la apiKey
   async obtenerNombreLugar() {
-    const apiKey = 'AIzaSyCShFjh1lVUwXAzJyQw_ylR05tn0sbOK74'; // Reemplaza con tu clave de API
+    const apiKey = 'AIzaSyCShFjh1lVUwXAzJyQw_ylR05tn0sbOK74'; 
     const coordinates = await this.obtenerUbicacionActual();
     if (coordinates) {
       const { latitude, longitude } = coordinates;
