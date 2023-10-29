@@ -4,8 +4,8 @@
 		"classpath": "com.capacitorjs.plugins.app.AppPlugin"
 	},
 	{
-		"pkg": "@capacitor/google-maps",
-		"classpath": "com.capacitorjs.plugins.googlemaps.CapacitorGoogleMapsPlugin"
+		"pkg": "@capacitor/geolocation",
+		"classpath": "com.capacitorjs.plugins.geolocation.GeolocationPlugin"
 	},
 	{
 		"pkg": "@capacitor/haptics",
