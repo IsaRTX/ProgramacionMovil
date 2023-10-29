@@ -15,7 +15,7 @@ export class MenuPage {
   constructor(private navCtrl: NavController) {}
 
   navigateToUserPage() {
-    this.navCtrl.navigateForward('usuario'); // Reemplaza 'ruta-de-usuario' con la ruta real de tu página de usuario
+    this.navCtrl.navigateForward('usuario');
   }
 
   toggleChange() {
@@ -27,23 +27,31 @@ export class MenuPage {
   nombreDelLugar: string | undefined;
   
   async abrirCamara() {
-    try {
-      const image = await Camera.getPhoto({
-        quality: 90,
-        allowEditing: false,
-        resultType: CameraResultType.DataUrl,
-        source: CameraSource.Camera,
-      });
-
-      const imageUrl = image?.dataUrl ?? '';
-
-      if (imageUrl) {
-        this.images.push(imageUrl);
+    const permissions = await Camera.requestPermissions();
+    if (typeof permissions.camera === 'string' && permissions.camera === 'granted') {
+      try {
+        const image = await Camera.getPhoto({
+          quality: 90,
+          allowEditing: false,
+          resultType: CameraResultType.DataUrl,
+          source: CameraSource.Camera,
+        });
+  
+        const imageUrl = image?.dataUrl ?? '';
+  
+        if (imageUrl) {
+          this.images.push(imageUrl);
+        }
+      } catch (error) {
+        console.error('Error al abrir la cámara:', error);
       }
-    } catch (error) {
-      console.error('Error al abrir la cámara:', error);
+    } else {
+      console.warn('Permiso de cámara denegado');
     }
   }
+  
+  
+  
 
   getImageName(imageUrl: string): string {
     const parts = imageUrl.split('/');
