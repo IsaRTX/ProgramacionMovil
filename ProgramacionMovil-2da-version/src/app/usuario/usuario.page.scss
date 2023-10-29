@@ -1,26 +1,38 @@
-/* Estilos para centrar la imagen */
-.user-image {
+.user-profile {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
-.user-image ion-img {
-    width: 150px; 
-    height: 150px; 
-    border-radius: 50%; 
-
-
+  .user-image {
+    border-radius: 50%;
+    overflow: hidden;
+    display: inline-block;
   }
-
-.user-details {
+  
+  .no-user-image {
+    background-size: cover;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  
+  .user-image input {
+    display: none;
+  }
+  
+  .user-details {
     text-align: center;
     margin-top: 20px;
   }
   
-.user-details h2 {
+  .user-details h2 {
     font-size: 24px;
   }
   
-.user-details p {
-    font-size: 18px; 
+  .user-details p {
+    font-size: 18px;
   }
   

@@ -13,25 +13,17 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card>
+  <ion-card class="user-profile">
     <ion-card-content>
-      <div class="user-image">
+      <div [ngClass]="{'user-image': imagenPerfil !== 'assets/default-profile-image.png', 'no-user-image': imagenPerfil === 'assets/default-profile-image.png'}">
         <ion-img [src]="imagenPerfil"></ion-img>
+        <input type="file" accept="image/*" (change)="cargarImagenPerfil($event)" [disabled]="!editMode" />
       </div>
-      <input type="file" accept="image/*" (change)="cargarImagenPerfil($event)" [disabled]="!editMode" />
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-content>
-      <div class="user-profile">
-        <div class="user-details">
-          <h2>{{ nombreCompleto }}</h2>
-          <p>{{ correoElectronico }}</p>
-          <p>Editar contraseña</p>
-        </div>
+      <div class="user-details">
+        <h2>{{ nombreCompleto }}</h2>
+        <p>{{ correoElectronico }}</p>
+        <p>Editar contraseña</p>
       </div>
     </ion-card-content>
   </ion-card>
 </ion-content>
-
