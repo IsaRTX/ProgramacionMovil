@@ -1,6 +1,14 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>Datos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="navigateToUserPage()">
+        <ion-icon name="person"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -17,28 +25,19 @@
       Ingreso de datos:
     </ion-card-header>
     <ion-card-content>
-      <ion-item>
-        <ion-button (click)="obtenerNombreLugar()">Ubicación actual
-        </ion-button>
 
       <ion-item>
-        <ion-label></ion-label>
-        <ion-input [(ngModel)]="nombreDelLugar" disabled="true"></ion-input>
-      </ion-item>
+        <ion-button (click)="obtenerNombreLugar()">
+          Ubicación actual
+        </ion-button>
+        <ion-item>
+          <ion-label></ion-label>
+          <ion-input [(ngModel)]="nombreDelLugar" disabled="true"></ion-input>
+        </ion-item>
         <ion-label position="floating">Nombre negocio/empresa</ion-label>
         <ion-icon name="map-outline" slot="start"></ion-icon>
         <ion-input type="text"></ion-input>
       </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Producto</ion-label>
-        <ion-icon name="pricetags-outline" slot="start"></ion-icon>
-        <ion-select>
-          <ion-select-option value="comida">Comida</ion-select-option>
-          <ion-select-option value="material">Material</ion-select-option>
-        </ion-select>
-      </ion-item>
-
       <ion-item>
         <ion-label position="floating">Valor</ion-label>
         <ion-icon name="cash-outline" slot="start"></ion-icon>
@@ -46,19 +45,21 @@
       </ion-item>
 
       <ion-item class="centered-button">
-        <label class="custom-label-button" (click)="abrirCamara()">
-          <ion-icon name="camera" slot="start" class="center-icon"></ion-icon>
-          Adjuntar Imagen
+        <ion-icon name="camera" slot="start"></ion-icon>
+        <label class="custom-button" (click)="abrirCamara()">
+          INSERTAR IMAGEN
         </label>
         <ion-input type="text" readonly></ion-input>
       </ion-item>
       
       <ion-list>
         <ion-item *ngFor="let image of images; let i = index">
-          {{ getImageName(image) }} <!-- Mostrar el nombre de la imagen -->
-          <ion-icon (click)="eliminarImagen(i)" name="trash" slot="end"></ion-icon> <!-- Icono de eliminar -->
+          <img src="{{ image }}" alt="Imagen" class="thumbnail-image">
+          {{ getImageName(image) }} 
+          <ion-icon (click)="eliminarImagen(i)" name="trash" slot="end"></ion-icon> 
         </ion-item>
       </ion-list>
+      
       
     </ion-card-content>
   </ion-card>
@@ -81,7 +82,7 @@
         <ion-label>Socio:</ion-label>
         <ion-select>
           <ion-select-option value="Ignacia">Ignacia</ion-select-option>
-          <ion-select-option value="Marcelo">Fabian</ion-select-option>
+          <ion-select-option value="Fabian">Fabian</ion-select-option>
           <ion-select-option value="David">David</ion-select-option>
         </ion-select>
       </ion-item>

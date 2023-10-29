@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Geolocation } from '@capacitor/geolocation';
+import { NavController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 @Component({
@@ -11,11 +12,16 @@ export class MenuPage {
   toggleValue: boolean = false;
   images: string[] = [];
 
-  constructor() {}
+  constructor(private navCtrl: NavController) {}
+
+  navigateToUserPage() {
+    this.navCtrl.navigateForward('usuario'); // Reemplaza 'ruta-de-usuario' con la ruta real de tu página de usuario
+  }
 
   toggleChange() {
     this.toggleValue = !this.toggleValue;
   }
+
   latitude: number | undefined;
   longitude: number | undefined;
   nombreDelLugar: string | undefined;

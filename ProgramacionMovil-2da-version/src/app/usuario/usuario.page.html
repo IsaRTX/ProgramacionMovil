@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/menu"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Usuario</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="editarUsuario()">
+        <ion-icon name="create"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-content>
+      <div class="user-image">
+        <ion-img [src]="imagenPerfil"></ion-img>
+      </div>
+      <input type="file" accept="image/*" (change)="cargarImagenPerfil($event)" [disabled]="!editMode" />
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <div class="user-profile">
+        <div class="user-details">
+          <h2>{{ nombreCompleto }}</h2>
+          <p>{{ correoElectronico }}</p>
+          <p>Editar contraseña</p>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
