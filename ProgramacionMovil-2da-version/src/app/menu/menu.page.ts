@@ -39,6 +39,7 @@ export class MenuPage {
       // Limpiar campos
       this.nombreDelLugar = '';
       this.nombreNegocio = '';
+      this.notas = '';
       this.valor = 0;
       this.images = [];
       this.toggleValue = false;
