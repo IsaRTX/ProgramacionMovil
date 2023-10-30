@@ -27,12 +27,11 @@ export class LoginPage {
   login() {
     this.loginError = false;
     this.registroExitoso = false;
-
+  
     if (this.formularioLogin.valid) {
       const credenciales = this.formularioLogin.value;
-      const usuario = this.authService.obtenerUsuarioPorEmail(credenciales.email);
-
-      if (usuario && usuario.password === credenciales.password) {
+  
+      if (this.authService.verificarCredenciales(credenciales)) {
         console.log('Inicio de sesión exitoso');
         this.router.navigate(['/menu']);
       } else {
@@ -41,6 +40,7 @@ export class LoginPage {
       }
     }
   }
+  
 
   registrar() {
     this.loginError = false;

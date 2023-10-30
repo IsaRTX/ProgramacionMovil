@@ -28,7 +28,7 @@ export class MenuPage {
   }
   enviarDatos() {
     if (!this.nombreDelLugar || !this.nombreNegocio || this.valor <= 0 || this.images.length === 0) {
-      this.mensajeError = 'Rellene los campos obligatorios y agregue al menos una imagen.';
+      this.mensajeError = 'Rellene los campos obligatorios y agregue al menos una imagen de la boleta.';
       this.mostrarExito = false;
       this.mostrarError = true;
     } else {

@@ -8,10 +8,11 @@ export class AuthService {
 
   verificarCredenciales(credenciales: any): boolean {
     const usuario = this.usuariosRegistrados.find(
-      (u) => u.correoElectronico === credenciales.email && u.password === credenciales.password
+      (u) => u.correoElectronico === credenciales.correoElectronico && u.password === credenciales.password
     );
     return !!usuario;
   }
+  
   
 
   registrarUsuario(usuario: any): void {
