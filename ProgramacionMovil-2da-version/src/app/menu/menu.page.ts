@@ -11,8 +11,47 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 export class MenuPage {
   toggleValue: boolean = false;
   images: string[] = [];
-
-  constructor(private navCtrl: NavController) {}
+  mensajeExito: string = '';
+  mensajeError: string = '';
+  mostrarExito: boolean = false;
+  mostrarError: boolean = false;
+  latitude: number | undefined;
+  longitude: number | undefined;
+  nombreDelLugar: string | undefined;
+  nombreNegocio: string = ''; 
+  valor: number = 0; 
+  notas: string = '';
+  
+  constructor(private navCtrl: NavController) {
+    this.nombreDelLugar = '';
+    this.images = [];
+  }
+  enviarDatos() {
+    if (!this.nombreDelLugar || !this.nombreNegocio || this.valor <= 0 || this.images.length === 0) {
+      this.mensajeError = 'Rellene los campos obligatorios y agregue al menos una imagen.';
+      this.mostrarExito = false;
+      this.mostrarError = true;
+    } else {
+      this.mensajeExito = 'Datos enviados correctamente.';
+      this.mostrarExito = true;
+      this.mostrarError = false;
+  
+      // Limpiar campos
+      this.nombreDelLugar = '';
+      this.nombreNegocio = '';
+      this.valor = 0;
+      this.images = [];
+      this.toggleValue = false;
+  
+      setTimeout(() => {
+        this.mensajeExito = '';
+        this.mensajeError = '';
+        this.mostrarExito = false;
+        this.mostrarError = false;
+      }, 3000);
+    }
+  }
+  
 
   navigateToUserPage() {
     this.navCtrl.navigateForward('usuario');
@@ -21,10 +60,6 @@ export class MenuPage {
   toggleChange() {
     this.toggleValue = !this.toggleValue;
   }
-
-  latitude: number | undefined;
-  longitude: number | undefined;
-  nombreDelLugar: string | undefined;
   
   async abrirCamara() {
     const permissions = await Camera.requestPermissions();
@@ -36,9 +71,9 @@ export class MenuPage {
           resultType: CameraResultType.DataUrl,
           source: CameraSource.Camera,
         });
-  
+
         const imageUrl = image?.dataUrl ?? '';
-  
+
         if (imageUrl) {
           this.images.push(imageUrl);
         }
@@ -49,9 +84,6 @@ export class MenuPage {
       console.warn('Permiso de cámara denegado');
     }
   }
-  
-  
-  
 
   getImageName(imageUrl: string): string {
     const parts = imageUrl.split('/');
@@ -62,6 +94,29 @@ export class MenuPage {
     this.images.splice(index, 1);
   }
 
+  async agregarImagen(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const files = inputElement.files;
+  
+    if (files && files.length > 0) {
+      const file = files[0];
+      if (file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          if (e.target) {
+            const imageUrl = e.target.result as string;
+            this.images.push(imageUrl);
+          } else {
+            console.error('Error al leer el archivo.');
+          }
+        };
+        reader.readAsDataURL(file);
+      } else {
+        console.error('Seleccione una imagen válida.');
+      }
+    }
+  }
+  
   async obtenerUbicacion() {
     const coordinates = await Geolocation.getCurrentPosition();
     this.latitude = coordinates.coords.latitude;

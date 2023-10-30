@@ -25,7 +25,7 @@
 
   <ion-card>
     <ion-card-header>
-      Ingreso de datos:
+      Ingreso de datos (Obligatorio):
     </ion-card-header>
     <ion-card-content>
 
@@ -39,18 +39,22 @@
         </ion-item>
         <ion-label position="floating">Nombre negocio/empresa</ion-label>
         <ion-icon name="map-outline" slot="start"></ion-icon>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" [(ngModel)]="nombreNegocio"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Valor</ion-label>
+        <ion-label position="floating">Valor $</ion-label>
         <ion-icon name="cash-outline" slot="start"></ion-icon>
-        <ion-input type="text" value="$"></ion-input>
+        <ion-input type="number" [(ngModel)]="valor"></ion-input>
       </ion-item>
 
       <ion-item class="centered-button">
         <ion-icon name="camera" slot="start"></ion-icon>
         <label class="custom-button" (click)="abrirCamara()">
-          INSERTAR IMAGEN
+          TOMAR FOTO
+        </label>
+        <input type="file" accept="image/*" (change)="agregarImagen($event)" style="display: none" id="fileInput">
+        <label class="custom-button" for="fileInput">
+          SUBIR FOTO
         </label>
         <ion-input type="text" readonly></ion-input>
       </ion-item>
@@ -63,17 +67,16 @@
         </ion-item>
       </ion-list>
       
-      
     </ion-card-content>
   </ion-card>
   <ion-card>
     <ion-card-header>
-      Extras:
+      Extras (Opcional):
     </ion-card-header>
     <ion-card-content>
       <ion-item>
         <ion-label position="floating">Notas</ion-label>
-        <ion-textarea></ion-textarea>
+        <ion-textarea [(ngModel)]="notas"></ion-textarea>
       </ion-item>
 
       <ion-item>
@@ -91,5 +94,12 @@
       </ion-item>
     </ion-card-content>
   </ion-card>
+  <ion-card *ngIf="mostrarExito">
+    <ion-card-content class="exito">{{ mensajeExito }}</ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="mostrarError">
+    <ion-card-content class="error">{{ mensajeError }}</ion-card-content>
+  </ion-card>
+  <ion-button class="centered-button" expand="middle" (click)="enviarDatos()">ENVIAR DATOS</ion-button>
 </ion-content>
 
