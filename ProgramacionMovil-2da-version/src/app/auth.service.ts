@@ -6,13 +6,13 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   private usuariosRegistrados: any[] = [];
 
-  verificarCredenciales(credenciales: any): boolean {
-    const usuario = this.usuariosRegistrados.find(
-      (u) => u.correoElectronico === credenciales.correoElectronico && u.password === credenciales.password
-    );
-    return !!usuario;
-  }
-  
+ verificarCredenciales(credenciales: any): boolean {
+  const usuario = this.usuariosRegistrados.find(
+    (u) => u.correoElectronico === credenciales.correoElectronico && u.password === credenciales.password
+  );
+  return !!usuario;
+}
+
   
 
   registrarUsuario(usuario: any): void {

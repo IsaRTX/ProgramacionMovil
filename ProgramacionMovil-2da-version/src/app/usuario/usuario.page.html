@@ -15,7 +15,7 @@
 <ion-content [fullscreen]="true">
   <ion-card class="user-profile">
     <ion-card-content>
-      <div [ngClass]="{'user-image': imagenPerfil !== 'assets/default-profile-image.png', 'no-user-image': imagenPerfil === 'assets/default-profile-image.png'}">
+      <div [ngClass]="{'user-image': imagenPerfil !== 'assets/profileimg.png', 'no-user-image': imagenPerfil === 'assets/default-profile-image.png'}">
         <ion-img [src]="imagenPerfil"></ion-img>
         <input type="file" accept="image/*" (change)="cargarImagenPerfil($event)" [disabled]="!editMode" />
       </div>

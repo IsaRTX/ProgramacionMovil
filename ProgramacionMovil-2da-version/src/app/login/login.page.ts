@@ -41,6 +41,7 @@ export class LoginPage {
     }
   }
   
+  
 
   registrar() {
     this.loginError = false;
